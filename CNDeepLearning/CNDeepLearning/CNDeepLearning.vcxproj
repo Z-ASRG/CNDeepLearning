@@ -114,6 +114,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NeuralLayer.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="ZUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
