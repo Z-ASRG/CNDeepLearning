@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\GitHub\Source\Repos\CNDeepLearning\CNDeepLearning\RelyOn\arrayfire\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\GitHub\Source\Repos\CNDeepLearning\CNDeepLearning\RelyOn\arrayfire\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ArrayFire)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ArrayFire)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>E:\GitHub\Source\Repos\CNDeepLearning\CNDeepLearning\RelyOn\arrayfire\include;$(IncludePath)</IncludePath>
