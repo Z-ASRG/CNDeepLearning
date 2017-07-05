@@ -11,10 +11,13 @@ namespace ASRG
 	class Shape
 	{
 	public:
-		uint32 width, height, depth, batch;
+		union { int32 width, w, x; };
+		union { int32 height, h, y; };
+		union { int32 depth, d, z; };
+		union { int32 batch, b, a; };
 		//uint32 resolution, volume, size;
 	public:
-		Shape( uint32 height = 1, uint32 width = 1, uint32 depth = 1, uint32 batch = 1)
+		Shape(int32 height = 1, int32 width = 1, int32 depth = 1, int32 batch = 1)
 			:width(width), height(height), depth(depth), batch(batch)
 		{
 		};
