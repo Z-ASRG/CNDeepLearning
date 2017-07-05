@@ -7,39 +7,37 @@
 
 namespace ASRG
 {
-	namespace ML
+	class FullyConnectedLayer : public NeuralLayer
 	{
-		class FullyConnectedLayer : public NeuralLayer
+	protected:
+		Tensor m_Weight;
+		Tensor m_Bias;
+
+		Shape m_KernelShape;
+	public:
+		FullyConnectedLayer(const Shape &InShape, const Shape &KernelShape)
+			:NeuralLayer()
 		{
-		protected:
-			Tensor<float32> m_Weight;
-			Tensor<float32> m_Bias;
 
-			Shape m_KernelShape;
-		public:
-			FullyConnectedLayer(const Shape &InShape, const Shape &KernelShape)
-				:NeuralLayer()
-			{
-
-			};
-			~FullyConnectedLayer()
-			{
-
-			};
-
-			void Forward(const Tensor<float32> &InTensor) override
-			{
-
-			};
-			void Backward(const Tensor<float32> &OutTensor) override
-			{
-
-			};
-
-			void InitKernel() override;
-			void Destory() override;
 		};
-	}
+		~FullyConnectedLayer()
+		{
+
+		};
+
+		void Forward(const Tensor &InTensor) override
+		{
+
+		};
+		void Backward(const Tensor &OutTensor) override
+		{
+
+		};
+
+		void InitKernel() override;
+		void Destory() override;
+	};
+
 }
 
 #endif

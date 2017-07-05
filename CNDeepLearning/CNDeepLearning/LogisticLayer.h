@@ -7,38 +7,37 @@
 
 namespace ASRG
 {
-	namespace ML
+
+	class LogisticLayer : public NeuralLayer
 	{
-		class LogisticLayer : public NeuralLayer
+	protected:
+	public:
+		LogisticLayer(const Shape &InShape)
+			:NeuralLayer()
 		{
-		protected:
-		public:
-			LogisticLayer(const Shape &InShape)
-				:NeuralLayer()
-			{
-			};
-			~LogisticLayer()
-			{
-
-			};
-
-			void Forward(const Tensor<float32> &InTensor) override
-			{
-
-			};
-			void Backward(const Tensor<float32> &OutTensor) override
-			{
-
-			};
-
-			void InitKernel() override
-			{
-			};
-			void Destory() override
-			{
-			};
 		};
-	}
+		~LogisticLayer()
+		{
+
+		};
+
+		void Forward(const Tensor& InTensor) override
+		{
+
+		};
+		void Backward(const Tensor& OutTensor) override
+		{
+
+		};
+
+		void InitKernel() override
+		{
+		};
+		void Destory() override
+		{
+		};
+	};
+
 }
 
 #endif

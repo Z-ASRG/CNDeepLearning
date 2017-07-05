@@ -12,7 +12,7 @@ using namespace std;
 namespace ASRG
 {
 
-		class NeuralLayer
+		class ASRGNeuralLayer
 		{
 		protected:
 			Tensor m_Output;
@@ -23,8 +23,8 @@ namespace ASRG
 		//protected:
 			//virtual Shape _CalcOutputShape(const Shape &InShape) const { return InShape; };
 		public:
-			NeuralLayer() {};
-			~NeuralLayer() {};
+			ASRGNeuralLayer() {};
+			~ASRGNeuralLayer() {};
 
 			virtual void Forward(const Tensor& InTensor) = 0;
 			virtual void Backward(const Tensor& OutTensor) = 0;
@@ -32,7 +32,7 @@ namespace ASRG
 			virtual void InitKernel() = 0;
 			virtual void Destory() = 0;
 		};
-	
+
 }
 
 #endif
