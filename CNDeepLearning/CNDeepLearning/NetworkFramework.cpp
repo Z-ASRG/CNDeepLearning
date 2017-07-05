@@ -17,15 +17,18 @@ void ASRG::NetworkFramework::init()
 {
 	//Initilizing Driver
 	m_Context.InitializeContext();
+	//test
+	float inputdata[] = {0.05,0.10};
+	Tensor input(inputdata,1,2);
+	input.print();
 
-	Tensor tensor(2, 3, 4);
-	tensor.print();
+	float h1weight[] = { 0.15,0.20,0.25,0.30 };
+	Tensor h1_weight(h1weight,2,2);
+	h1_weight.print();
 
-	tensor.setRandomsUniform();
-	tensor.print();
-	float data[] = { 0.95,0.76,0.33,0.5,0.2,0.3 };
-	Tensor t2(data, 2, 3);
-	t2.print();
+	Tensor r = input*h1_weight;
+	r.print();
+	
 }
 
 void ASRG::NetworkFramework::run()

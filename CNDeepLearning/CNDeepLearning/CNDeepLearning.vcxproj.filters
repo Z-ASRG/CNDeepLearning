@@ -74,5 +74,8 @@
     <ClInclude Include="NetworkContext.h">
       <Filter>Driver</Filter>
     </ClInclude>
+    <ClInclude Include="InputLayer.h">
+      <Filter>Header Files\Layers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

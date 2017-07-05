@@ -32,6 +32,10 @@ namespace ASRG
 		{}
 		~Tensor();
 
+		af::array Array() const { return m_Array; }
+		void Array(af::array val) { m_Array = val; }
+		ASRG::Shape Shape() const { return m_Shape; }
+		void Shape(ASRG::Shape val) { m_Shape = val; }
 	public:
 		//Matrix operation function sets
 		//Initializing all element to 0
@@ -102,6 +106,17 @@ namespace ASRG
 		//************************************
 		virtual void print();
 
+	public:
+		//Row * Column
+		//************************************
+		// Method:    operator*
+		// FullName:  ASRG::Tensor::operator*
+		// Access:    public 
+		// Returns:   ASRG::Tensor
+		// Qualifier: const
+		// Parameter: const Tensor & i
+		//************************************
+		Tensor operator*(const Tensor& i)const;
 	};
 
 

@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="AlgorithmGenerator.h" />
     <ClInclude Include="FullyConnectedLayer.h" />
+    <ClInclude Include="InputLayer.h" />
     <ClInclude Include="LogisticLayer.h" />
     <ClInclude Include="NetworkContext.h" />
     <ClInclude Include="NetworkFramework.h" />

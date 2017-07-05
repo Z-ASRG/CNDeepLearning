@@ -40,6 +40,13 @@ void ASRG::Tensor::print()
 	af_print(element);
 }
 
+ASRG::Tensor ASRG::Tensor::operator*(const Tensor& i)const
+{
+	Tensor m;
+	m.m_Array = af::matmul(m_Array, i.m_Array);
+	return m;
+}
+
 int ASRG::Tensor::getDimensions(int pos)
 {
 	return m_Array.dims(pos);

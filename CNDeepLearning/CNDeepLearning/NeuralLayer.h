@@ -6,7 +6,8 @@
 #include "Util.h"
 #include "Shape.h"
 #include "Tensor.h"
-
+#include <iostream>
+#include <memory>
 using namespace std;
 
 namespace ASRG
@@ -20,6 +21,9 @@ namespace ASRG
 
 			Shape m_InputShape;
 			Shape m_OutputShape;
+
+			std::shared_ptr<NeuralLayer> parent;
+			std::shared_ptr<NeuralLayer> child;
 		//protected:
 			//virtual Shape _CalcOutputShape(const Shape &InShape) const { return InShape; };
 		public:
