@@ -120,7 +120,6 @@
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Tensor.h" />
     <ClInclude Include="Util.h" />
-    <ClInclude Include="ZUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
