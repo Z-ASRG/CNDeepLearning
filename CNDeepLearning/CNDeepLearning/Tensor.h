@@ -24,7 +24,7 @@ namespace ASRG
 
 		//x =row y=column z= group a= batch
 		Tensor(int x=1, int y=1, int z=1, int a=1);
-		Tensor(int x=1, int y=1, int z=1, int a=1);
+		//Tensor(int x=1, int y=1, int z=1, int a=1);
 		~Tensor();
 
 	public:
