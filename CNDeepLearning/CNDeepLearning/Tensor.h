@@ -24,13 +24,14 @@ namespace ASRG
 
 		//x =row y=column z= group a= batch
 		Tensor(int x=1, int y=1, int z=1, int a=1);
+		Tensor(int x=1, int y=1, int z=1, int a=1);
 		~Tensor();
 
 	public:
 		virtual void setZeros();
 		//Generate and tranform array into [-1,1]
 		virtual void setRandoms();
-		//Generate and tranform array into [1,1]
+		//Generate and tranform array into [0,1]
 		virtual void setRandomsUniform();
 		//Generate and traform array into identity
 		virtual void setIdentity();

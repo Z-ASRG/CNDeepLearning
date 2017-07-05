@@ -9,7 +9,7 @@ int main()
 
 	try
 	{
-		Tensor tensor(2, 3,4);
+		Tensor tensor(2, 3, 4);
 		tensor.print();
 
 		tensor.setRandomsUniform();
