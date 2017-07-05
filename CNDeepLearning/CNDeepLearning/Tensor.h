@@ -13,7 +13,7 @@ using namespace std;
 
 namespace ASRG
 {
-
+	
 	class Tensor
 	{
 	private:
@@ -23,8 +23,14 @@ namespace ASRG
 		//Constructor
 
 		//x =row y=column z= group a= batch
-		Tensor(int x=1, int y=1, int z=1, int a=1);
-		//Tensor(int x=1, int y=1, int z=1, int a=1);
+		Tensor(int x = 1, int y = 1, int z = 1, int a = 1);
+
+		template<typename T = float>
+		Tensor(const T* data, int x = 1, int y = 1, int z = 1, int a = 1)
+			:m_Array(x, y, z, a,data), m_Shape(x, y, z, a), _x(x), _y(y), _z(z), _a(a)
+		{
+
+		}
 		~Tensor();
 
 	public:
@@ -40,6 +46,7 @@ namespace ASRG
 	private:
 		int _x, _y, _z, _a;
 	};
+
 
 
 

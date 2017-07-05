@@ -14,6 +14,9 @@ int main()
 
 		tensor.setRandomsUniform();
 		tensor.print();
+		float data[] = {0.95,0.76,0.33,0.5};
+		Tensor t2(data,2,2);
+		t2.print();
 	}
 	catch (const std::exception& e)
 	{
