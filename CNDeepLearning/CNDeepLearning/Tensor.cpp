@@ -39,3 +39,13 @@ void ASRG::Tensor::print()
 	af::array& element = m_Array;
 	af_print(element);
 }
+
+int ASRG::Tensor::getDimensions(int pos)
+{
+	return m_Array.dims(pos);
+}
+
+int ASRG::Tensor::getDimensionsSize()
+{
+	return m_Array.numdims();
+}

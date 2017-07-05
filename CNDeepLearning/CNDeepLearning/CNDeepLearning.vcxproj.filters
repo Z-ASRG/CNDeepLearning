@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Layers">
       <UniqueIdentifier>{5b49cfb6-e518-45fe-89d7-7cdc2fbc4725}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{4294d5fa-20e3-40ae-8ba9-b16eb483d7e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="Tensor.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="LogisticLayer.h">
       <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
