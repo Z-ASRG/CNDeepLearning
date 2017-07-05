@@ -5,6 +5,7 @@
 
 #include "Util.h"
 #include "Shape.h"
+#include "Tensor.h"
 
 using namespace std;
 
@@ -12,24 +13,25 @@ namespace ASRG
 {
 	namespace ML
 	{
-		class Tensor;
-		
 		class NeuralLayer
 		{
-		private:
-			vector<float32> m_Weight;
-			vector<float32> m_Bias;
+		protected:
+			Tensor<float32> m_Output;
+			Tensor<float32> m_Diff;
 
 			Shape m_InputShape;
 			Shape m_OutputShape;
+		//protected:
+			//virtual Shape _CalcOutputShape(const Shape &InShape) const { return InShape; };
 		public:
-			NeuralLayer();
-			~NeuralLayer();
+			NeuralLayer() {};
+			~NeuralLayer() {};
 
-			virtual void Forward() = 0;
-			virtual void Backward() = 0;
+			virtual void Forward(const Tensor<float32> &InTensor) = 0;
+			virtual void Backward(const Tensor<float32> &OutTensor) = 0;
 
-			virtual void Resize();
+			virtual void InitKernel() = 0;
+			virtual void Destory() = 0;
 		};
 	}
 }
