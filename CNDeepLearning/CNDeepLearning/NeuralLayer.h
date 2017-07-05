@@ -16,7 +16,7 @@ namespace ASRG
 		{
 		protected:
 			Tensor m_Output;
-			Tensor m_Diff;
+			Tensor m_Diff; //error 
 
 			Shape m_InputShape;
 			Shape m_OutputShape;

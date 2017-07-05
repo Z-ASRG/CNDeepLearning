@@ -126,12 +126,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkContext.cpp" />
+    <ClCompile Include="NetworkFramework.cpp" />
     <ClCompile Include="Tensor.cpp" />
     <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlgorithmGenerator.h" />
     <ClInclude Include="FullyConnectedLayer.h" />
     <ClInclude Include="LogisticLayer.h" />
+    <ClInclude Include="NetworkContext.h" />
+    <ClInclude Include="NetworkFramework.h" />
     <ClInclude Include="NeuralLayer.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Tensor.h" />
