@@ -114,8 +114,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FullyConnectedLayer.h" />
+    <ClInclude Include="LogisticLayer.h" />
     <ClInclude Include="NeuralLayer.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Tensor.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="ZUtil.h" />
   </ItemGroup>

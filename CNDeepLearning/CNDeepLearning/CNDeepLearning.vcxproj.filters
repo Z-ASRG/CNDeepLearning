@@ -35,5 +35,14 @@
     <ClInclude Include="Shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FullyConnectedLayer.h">
+      <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="LogisticLayer.h">
+      <Filter>Header Files\Layers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
