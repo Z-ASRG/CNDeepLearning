@@ -36,10 +36,29 @@ namespace ASRG
 		void ReshapeNetwork();
 
 		//Forward, just call forward function in order
-		void Forward(const Tensor &TrainingDataBatch);
+		void Forward(const Tensor &TrainingDataBatch)
+		{
+			//NeuralLayer* pPrevLayer
+			for (auto &Layer : m_Network)
+			{
+				//Layer.Forward(pPrevLayer->GetOutput());
+			}
+		};
 
 		//Backward, call backward update grad, then use UpdateWeight function update weight
-		void Backward(const Tensor &TrainingLabelBatch);
+		void Backward(const Tensor &TrainingLabelBatch)
+		{
+			//NeuralLayer* pPrevLayer
+			for (auto &Layer : m_Network)
+			{
+				//Layer.Backward(pPrevLayer->GetDiff());
+			}
+
+			for (auto &Layer : m_Network)
+			{
+				//Layer.UpdateWeight();
+			}
+		};
 
 		//Training
 		void Training(const vector<float32> &DataSet, const vector<float32> &LabelSet, float32 LearningRate, float32 Momentum, float32 Times);

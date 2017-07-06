@@ -46,6 +46,18 @@ namespace ASRG
 			m_Output.Reshape(m_OutputShape);
 			m_Diff.Reshape(m_InputShape);
 		};
+
+		const Tensor& GetOutput() const
+		{
+			return m_Output;
+		};
+		const Tensor& GetDiff() const
+		{
+			return m_Diff;
+		};
+
+		Shape GetInputShape() const { return m_InputShape; }
+		Shape GetOutputShape() const { return m_OutputShape; }
 	};
 
 }
