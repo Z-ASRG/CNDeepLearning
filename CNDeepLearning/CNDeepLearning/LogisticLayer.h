@@ -16,7 +16,6 @@ namespace ASRG
 		};
 		~LogisticLayer()
 		{
-
 		};
 
 		void Create()

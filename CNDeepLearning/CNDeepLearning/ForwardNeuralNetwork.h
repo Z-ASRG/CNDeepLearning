@@ -35,10 +35,10 @@ namespace ASRG
 		//Reshape the input, output, batch size
 		void ReshapeNetwork();
 
-		//Forward
+		//Forward, just call forward function in order
 		void Forward(const Tensor &TrainingDataBatch);
 
-		//Backward
+		//Backward, call backward update grad, then use UpdateWeight function update weight
 		void Backward(const Tensor &TrainingLabelBatch);
 
 		//Training

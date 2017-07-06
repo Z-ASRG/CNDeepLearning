@@ -16,7 +16,7 @@ namespace ASRG
 		vector<float32> m_Data;
 		Shape m_Shape;
 	public:
-		Tensor(const Shape &TensorShape, float32 Val)
+		Tensor(const Shape &TensorShape = Shape(), float32 Val = 0.0)
 			:m_Data(TensorShape.Size(), Val), m_Shape(TensorShape)
 		{
 		};
@@ -98,24 +98,30 @@ namespace ASRG
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] + Val;
+					m_Data[Index + seek] += Val;
 				}
 			}
 		};
-		void Add(const Tensor &T)
+		void Add(const Tensor &T, const bool bPerBatch = false)
 		{
-			if (m_Shape != T.m_Shape) { return; }
+			if (m_Shape.Volume() != T.m_Shape.Volume()) { return; }
+
+			if (!bPerBatch)
+			{
+				if (m_Shape != T.m_Shape) { return; }
+			}
 
 			const uint32 VolumeSize = m_Shape.Size();
 
 #pragma omp parallel for
 			for (int32 seek_batch = 0; seek_batch < m_Shape.batch; seek_batch++)
 			{
-				uint32 Index = seek_batch * VolumeSize;
+				uint32 SrcIndex = seek_batch * VolumeSize;
+				uint32 DestIndex = bPerBatch ? 0 : SrcIndex;
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] + T[seek];
+					m_Data[SrcIndex + seek] += T[DestIndex + seek];
 				}
 			}
 		};
@@ -131,22 +137,30 @@ namespace ASRG
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] - Val;
+					m_Data[Index + seek] -= Val;
 				}
 			}
 		};
-		void Sub(const Tensor &T)
+		void Sub(const Tensor &T, const bool bPerBatch = false)
 		{
+			if (m_Shape.Volume() != T.m_Shape.Volume()) { return; }
+
+			if (!bPerBatch)
+			{
+				if (m_Shape != T.m_Shape) { return; }
+			}
+
 			const uint32 VolumeSize = m_Shape.Size();
 
 #pragma omp parallel for
 			for (int32 seek_batch = 0; seek_batch < m_Shape.batch; seek_batch++)
 			{
-				uint32 Index = seek_batch * VolumeSize;
+				uint32 SrcIndex = seek_batch * VolumeSize;
+				uint32 DestIndex = bPerBatch ? 0 : SrcIndex;
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] - T[seek];
+					m_Data[SrcIndex + seek] -= T[DestIndex + seek];
 				}
 			}
 		};
@@ -162,24 +176,30 @@ namespace ASRG
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] * Val;
+					m_Data[Index + seek] *= Val;
 				}
 			}
 		};
-		void Mul(const Tensor &T)
+		void Mul(const Tensor &T, const bool bPerBatch = false)
 		{
-			if (m_Shape != T.m_Shape) { return; }
+			if (m_Shape.Volume() != T.m_Shape.Volume()) { return; }
+
+			if (!bPerBatch)
+			{
+				if (m_Shape != T.m_Shape) { return; }
+			}
 
 			const uint32 VolumeSize = m_Shape.Size();
 
 #pragma omp parallel for
 			for (int32 seek_batch = 0; seek_batch < m_Shape.batch; seek_batch++)
 			{
-				uint32 Index = seek_batch * VolumeSize;
+				uint32 SrcIndex = seek_batch * VolumeSize;
+				uint32 DestIndex = bPerBatch ? 0 : SrcIndex;
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = m_Data[seek] * T[seek];
+					m_Data[SrcIndex + seek] *= T[DestIndex + seek];
 				}
 			}
 		};
@@ -195,7 +215,7 @@ namespace ASRG
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = pow(m_Data[seek], Val);
+					m_Data[Index + seek] = pow(m_Data[Index + seek], Val);
 				}
 			}
 		};
@@ -210,9 +230,15 @@ namespace ASRG
 
 				for (int seek = 0; seek < VolumeSize; seek++)
 				{
-					m_Data[seek] = exp(m_Data[seek]);
+					m_Data[Index + seek] = exp(m_Data[Index + seek]);
 				}
 			}
+		};
+
+		//Get shape
+		const Shape GetShape() const
+		{
+			return m_Shape;
 		};
 	};
 }
