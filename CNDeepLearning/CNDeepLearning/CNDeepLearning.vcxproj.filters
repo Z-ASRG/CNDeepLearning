@@ -30,9 +30,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -41,6 +38,12 @@
     </ClCompile>
     <ClCompile Include="NetworkContext.cpp">
       <Filter>Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Tensor.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,12 +62,6 @@
     <ClInclude Include="Shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AlgorithmGenerator.h">
       <Filter>Generator</Filter>
     </ClInclude>
@@ -76,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="InputLayer.h">
       <Filter>Header Files\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Tensor.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

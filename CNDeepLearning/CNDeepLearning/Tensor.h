@@ -32,7 +32,7 @@ namespace ASRG
 		{}
 		~Tensor();
 
-		af::array Array() const { return m_Array; }
+		af::array& Array()  { return m_Array; }
 		void Array(af::array val) { m_Array = val; }
 		ASRG::Shape Shape() const { return m_Shape; }
 		void Shape(ASRG::Shape val) { m_Shape = val; }
@@ -106,6 +106,8 @@ namespace ASRG
 		//************************************
 		virtual void print();
 
+		virtual Tensor tranverse();
+		virtual Tensor multiply(const Tensor& i);
 	public:
 		//Row * Column
 		//************************************
@@ -117,10 +119,26 @@ namespace ASRG
 		// Parameter: const Tensor & i
 		//************************************
 		Tensor operator*(const Tensor& i)const;
+
+		Tensor operator+(const Tensor& i)const;
+
+		Tensor operator-(const Tensor& i)const;
+
+		friend Tensor operator-(const float f,const Tensor& i);
+		friend Tensor operator*(const float f,const Tensor& i);
+	public:
+		template<typename T = float>
+		T sumTensor()
+		{
+			return af::sum<T>(m_Array);
+		}
+	public:
+		Tensor expandTensor();
 	};
 
 
-
+	Tensor operator-(const float f, const Tensor& i);
+	Tensor operator*(const float f,const Tensor& i);
 
 
 

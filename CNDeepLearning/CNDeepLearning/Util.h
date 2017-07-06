@@ -34,6 +34,8 @@ namespace ASRG
 	typedef float				float32;
 	typedef double				float64;
 
+
+
 }
 
 #endif

@@ -37,7 +37,21 @@ void ASRG::Tensor::setIdentity()
 void ASRG::Tensor::print()
 {
 	af::array& element = m_Array;
-	af_print(element);
+	af_print(element,8);
+}
+
+Tensor ASRG::Tensor::tranverse()
+{
+	Tensor m;
+	m.m_Array = m_Array.T();
+	return m;
+}
+
+ASRG::Tensor ASRG::Tensor::multiply(const Tensor& i)
+{
+	Tensor m;
+	m.m_Array = m_Array*i.m_Array;
+	return m;
 }
 
 ASRG::Tensor ASRG::Tensor::operator*(const Tensor& i)const
@@ -46,7 +60,41 @@ ASRG::Tensor ASRG::Tensor::operator*(const Tensor& i)const
 	m.m_Array = af::matmul(m_Array, i.m_Array);
 	return m;
 }
+ASRG::Tensor ASRG::operator*(const float f, const Tensor& i)
+{
+	Tensor m;
+	m.m_Array = f*i.m_Array;
+	return m;
+}
+ASRG::Tensor ASRG::Tensor::operator+(const Tensor& i) const
+{
+	Tensor m;
+	m.m_Array = this->m_Array + i.m_Array;
+	return m;
+}
 
+ASRG::Tensor ASRG::Tensor::operator-(const Tensor& i) const
+{
+	Tensor m;
+	m.m_Array = this->m_Array - i.m_Array;
+	return m;
+}
+
+ASRG::Tensor ASRG::Tensor::expandTensor()
+{
+	float* m = m_Array.host<float>();
+	float a[] = {m[0],m[0],m[1],m[1]};
+	Tensor Epn(a, 2, 2);
+	delete[] m;
+	return Epn;
+}
+
+ASRG::Tensor ASRG::operator-(const float f, const Tensor& i)
+{
+	Tensor m;
+	m.m_Array = f - i.m_Array;
+	return m;
+}
 int ASRG::Tensor::getDimensions(int pos)
 {
 	return m_Array.dims(pos);

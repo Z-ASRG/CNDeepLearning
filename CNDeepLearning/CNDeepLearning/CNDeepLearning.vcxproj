@@ -130,6 +130,7 @@
     <ClCompile Include="NetworkFramework.cpp" />
     <ClCompile Include="Tensor.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorithmGenerator.h" />
