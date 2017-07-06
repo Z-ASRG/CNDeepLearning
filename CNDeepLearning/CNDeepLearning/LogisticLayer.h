@@ -47,6 +47,7 @@ namespace ASRG
 		void Reshape(const Shape &InputShape)
 		{
 			m_OutputShape = InputShape;
+			static_cast<NeuralLayer*>(this)->Reshape();
 		};
 	};
 }

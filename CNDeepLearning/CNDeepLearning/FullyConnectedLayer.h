@@ -57,6 +57,7 @@ namespace ASRG
 		//Calc grad
 		void Backward(const Tensor& OutTensor)
 		{
+
 		};
 
 		//Update weight
