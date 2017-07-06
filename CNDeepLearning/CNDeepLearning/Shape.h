@@ -95,7 +95,6 @@ namespace ASRG
 			return Volume() * batch;
 		};
 	};
-
 }
 
 #endif

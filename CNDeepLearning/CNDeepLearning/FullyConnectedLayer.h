@@ -15,27 +15,37 @@ namespace ASRG
 
 		Shape m_KernelShape;
 	public:
-		FullyConnectedLayer(const Shape &InShape, const Shape &KernelShape)
-			:NeuralLayer()
+		FullyConnectedLayer(const Shape &KernelShape)
+			:NeuralLayer(), m_KernelShape(KernelShape)
 		{
-
 		};
 		~FullyConnectedLayer()
 		{
-
 		};
 
-		void Forward(const Tensor &InTensor) override
+		void Create()
 		{
-
 		};
-		void Backward(const Tensor &OutTensor) override
+		void Destory()
 		{
-
 		};
 
-		void InitKernel() override;
-		void Destory() override;
+		void Forward(const Tensor& InTensor)
+		{
+		};
+		void Backward(const Tensor& OutTensor)
+		{
+		};
+
+		void UpdateWeight(const Tensor& OutTensor)
+		{
+		};
+
+		void Reshape(const Shape &InputShape)
+		{
+			m_OutputShape = Shape(1, 1, InputShape.Volume(), InputShape.batch);
+			Reshape();
+		};
 	};
 
 }

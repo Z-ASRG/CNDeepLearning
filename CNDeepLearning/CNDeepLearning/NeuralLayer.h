@@ -6,37 +6,42 @@
 #include "Util.h"
 #include "Shape.h"
 #include "Tensor.h"
-#include <iostream>
-#include <memory>
+
 using namespace std;
 
 namespace ASRG
 {
+	class NeuralLayer
+	{
+	protected:
+		Tensor m_Output;
+		Tensor m_Diff;
 
-		class NeuralLayer
-		{
-		protected:
-			Tensor m_Output;
-			Tensor m_Diff; //error 
+		Shape m_InputShape;
+		Shape m_OutputShape;
 
-			Shape m_InputShape;
-			Shape m_OutputShape;
-
-			std::shared_ptr<NeuralLayer> parent;
-			std::shared_ptr<NeuralLayer> child;
 		//protected:
-			//virtual Shape _CalcOutputShape(const Shape &InShape) const { return InShape; };
-		public:
-			NeuralLayer() {};
-			~NeuralLayer() {};
+		//virtual Shape _CalcOutputShape(const Shape &InShape) const { return InShape; };
+	public:
+		NeuralLayer() {};
+		~NeuralLayer() {};
 
-			virtual void Forward(const Tensor& InTensor) = 0;
-			virtual void Backward(const Tensor& OutTensor) = 0;
+		virtual void Create() = 0;
+		virtual void Destory() = 0;
 
-			virtual void InitKernel() = 0;
-			virtual void Destory() = 0;
-		};
-	
+		virtual void Forward(const Tensor& InTensor) = 0;
+		virtual void Backward(const Tensor& OutTensor) = 0;
+
+		virtual void UpdateWeight(const Tensor& OutTensor) = 0;
+
+		virtual void Reshape(const Shape &InputShape) = 0;
+
+		void Reshape()
+		{
+			//Reshape output, diff tensor
+		}
+	};
+
 }
 
 #endif

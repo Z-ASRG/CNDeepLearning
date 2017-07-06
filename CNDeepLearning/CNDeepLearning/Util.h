@@ -4,6 +4,8 @@
 #define __UTIL_H__
 
 #include "iostream"
+#include "fstream"
+#include "array"
 #include "vector"
 #include "list"
 #include "set"
@@ -16,6 +18,7 @@
 #include "string"
 #include "ctime"
 #include "random"
+#include "cstdio"
 
 using namespace std;
 

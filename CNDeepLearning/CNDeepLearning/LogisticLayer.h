@@ -7,10 +7,8 @@
 
 namespace ASRG
 {
-
 	class LogisticLayer : public NeuralLayer
 	{
-	protected:
 	public:
 		LogisticLayer(const Shape &InShape)
 			:NeuralLayer()
@@ -21,23 +19,37 @@ namespace ASRG
 
 		};
 
-		void Forward(const Tensor& InTensor) override
+		void Create()
+		{
+		};
+		void Destory()
+		{
+		};
+
+		void Forward(const Tensor& InTensor)
+		{
+			//sigmoid val = 1.0 / (1.0 + e^(-x))
+			m_Output = InTensor;
+
+			m_Output.Mul(-1);
+			m_Output.Exp();
+			m_Output.Add(1.0);
+			m_Output.Pow(-1);
+		};
+		void Backward(const Tensor& OutTensor)
 		{
 
 		};
-		void Backward(const Tensor& OutTensor) override
-		{
 
+		void UpdateWeight(const Tensor& OutTensor)
+		{
 		};
 
-		void InitKernel() override
+		void Reshape(const Shape &InputShape)
 		{
-		};
-		void Destory() override
-		{
+			m_OutputShape = InputShape;
 		};
 	};
-
 }
 
 #endif

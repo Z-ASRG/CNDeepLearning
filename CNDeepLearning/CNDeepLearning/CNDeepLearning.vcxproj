@@ -128,11 +128,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkContext.cpp" />
     <ClCompile Include="NetworkFramework.cpp" />
-    <ClCompile Include="Tensor.cpp" />
     <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlgorithmGenerator.h" />
+    <ClInclude Include="ForwardNeuralNetwork.h" />
     <ClInclude Include="FullyConnectedLayer.h" />
     <ClInclude Include="InputLayer.h" />
     <ClInclude Include="LogisticLayer.h" />
