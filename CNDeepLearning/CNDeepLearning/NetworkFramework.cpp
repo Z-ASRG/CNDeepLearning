@@ -2,6 +2,13 @@
 
 
 using namespace ASRG;
+inline void expandTensor(af::array& arr)
+{
+	float* m = arr.host<float>();
+	float a[] = { m[0],m[0],m[1],m[1] };
+	arr = af::array( 2, 2, a);
+	delete[] m;
+}
 
 NetworkFramework::NetworkFramework()
 {
@@ -19,24 +26,22 @@ void ASRG::NetworkFramework::init()
 	m_Context.InitializeContext();
 	//test
 	float inputdata[] = { 0.05,0.10 };
-	input = Tensor(inputdata, 1, 2);
-	input.print();
+	input = af::array( 1, 2, inputdata);
 
 	float h1weight[] = { 0.15,0.20,0.25,0.30 };
-	h1_weight = Tensor(h1weight, 2, 2);
-	h1_weight.print();
+	h1_weight = af::array( 2, 2, h1weight);
 
 	float h2weight[] = { 0.40,0.45,0.50,0.55 };
-	h2_weight = Tensor(h2weight, 2, 2);
+	h2_weight = af::array( 2, 2, h2weight);
 
 	float bv[] = { 0.35,0.35 };
-	b = Tensor(bv, 1, 2);
+	b = af::array( 1, 2, bv);
 
 	float bv2[] = { 0.6,0.6 };
-	b2 = Tensor(bv2, 1, 2);
+	b2 = af::array( 1, 2, bv2);
 
 	float target[] = { 0.01,0.99 };
-	Target = Tensor(target, 1, 2);
+	Target = af::array(1, 2, target);
 
 	learning_rate = 0.5;
 }
@@ -62,24 +67,24 @@ void ASRG::NetworkFramework::clear()
 void ASRG::NetworkFramework::forward()
 {
 	//first level
-	Tensor neth = input*h1_weight;
+	af::array neth = af::matmul(input,h1_weight);
 	//neth.print();
 
 	outh = neth + b;
 	//outh.print();
 
-	gfor(af::seq i, outh.getDimensions(1))
+	gfor(af::seq i, outh.dims(1))
 	{
-		outh.Array()(af::span, i) = 1.0 / (1.0 + exp(-1 * outh.Array()(af::span, i)));
+		outh(af::span, i) = 1.0 / (1.0 + exp(-1 * outh(af::span, i)));
 	}
 	//outh.print();
 
 	//second level
 
-	outo = outh*h2_weight + b2;
-	gfor(af::seq i, outo.getDimensions(1))
+	outo = af::matmul(outh,h2_weight) + b2;
+	gfor(af::seq i, outo.dims(1))
 	{
-		outo.Array()(af::span, i) = 1.0 / (1.0 + exp(-1 * outo.Array()(af::span, i)));
+		outo(af::span, i) = 1.0 / (1.0 + exp(-1 * outo(af::span, i)));
 	}
 
 	//outo.print();
@@ -88,87 +93,87 @@ void ASRG::NetworkFramework::forward()
 
 
 	E_total = Target - outo;
-	gfor(af::seq i, E_total.getDimensions(1))
+	gfor(af::seq i, E_total.dims(1))
 	{
-		E_total.Array()(af::span, i) = E_total.Array()(af::span, i)*E_total.Array()(af::span, i)*0.5;
+		E_total(af::span, i) = E_total(af::span, i)*E_total(af::span, i)*0.5;
 	}
 	//E_total.print();
 
-	e_total = E_total.sumTensor();
+	e_total = af::sum<float>(E_total);
 	
 }
 
 void ASRG::NetworkFramework::backward()
 {
 	//BP
-	Tensor E_out = outo - Target;
+	af::array E_out = outo - Target;
 	//cout << "!!!!!!!!!!!!!!" << endl;
 	//outo.print();
-	Tensor Out_net = (1 - outo);
+	af::array  Out_net = (1 - outo);
 
-	gfor(af::seq i, Out_net.getDimensions(1))
+	gfor(af::seq i, Out_net.dims(1))
 	{
-		Out_net.Array()(af::span, i) = Out_net.Array()(af::span, i)*outo.Array()(af::span, i);
+		Out_net(af::span, i) = Out_net(af::span, i)*outo(af::span, i);
 	}
 
 	//Out_net.print();
 
-	Tensor Net_w = outh;
+	af::array  Net_w = outh;
 	//Net_w.print();
 
-	Tensor Ep = E_out;
-	gfor(af::seq i, Ep.getDimensions(1))
+	af::array  Ep = E_out;
+	gfor(af::seq i, Ep.dims(1))
 	{
-		Ep.Array()(af::span, i) = Ep.Array()(af::span, i)
-			*Out_net.Array()(af::span, i)
-			*Net_w.Array()(af::span, i);
+		Ep(af::span, i) = Ep(af::span, i)
+			*Out_net(af::span, i)
+			*Net_w(af::span, i);
 	}
 
-	Ep = Ep.expandTensor();
+	expandTensor(Ep);
 
 	//Ep.print();
 	//h2_weight.print();
 
-	Tensor weight_new = h2_weight - learning_rate*Ep;
+	af::array  weight_new = h2_weight - learning_rate*Ep;
 
 	//weight_new.print();
 
 	//weight2
 
-	Tensor net_o = E_out;
-	gfor(af::seq i, net_o.getDimensions(1))
+	af::array  net_o = E_out;
+	gfor(af::seq i, net_o.dims(1))
 	{
-		net_o.Array()(af::span, i) = net_o.Array()(af::span, i)
-			*Out_net.Array()(af::span, i);
+		net_o(af::span, i) = net_o(af::span, i)
+			*Out_net(af::span, i);
 	}
-	net_o = net_o.expandTensor();
+	expandTensor(net_o);
 	//net_o.print();
 
-	Tensor e_out = net_o;
-	gfor(af::seq i, e_out.getDimensions(1))
+	af::array  e_out = net_o;
+	gfor(af::seq i, e_out.dims(1))
 	{
-		e_out.Array()(af::span, i) = e_out.Array()(af::span, i)
-			*h2_weight.Array()(af::span, i);
+		e_out(af::span, i) = e_out(af::span, i)
+			*h2_weight(af::span, i);
 	}
 	//h2_weight.print();
 	//e_out.print();
 	float v[] = { 1,1 };
-	Tensor e_outh(v, 2, 1);
-	e_outh = e_out*e_outh;
+	af::array e_outh( 2, 1, v);
+	e_outh = af::matmul(e_out,e_outh);
 	//e_outh.print();
-	Tensor outh_neth = outh;
-	gfor(af::seq i, outh_neth.getDimensions(1))
+	af::array outh_neth = outh;
+	gfor(af::seq i, outh_neth.dims(1))
 	{
-		outh_neth.Array()(af::span, i) = outh_neth.Array()(af::span, i)
-			*(1 - outh_neth.Array()(af::span, i));
+		outh_neth(af::span, i) = outh_neth(af::span, i)
+			*(1 - outh_neth(af::span, i));
 	}
 	//outh_neth.print();
-	e_outh = e_outh.tranverse();
-	Tensor e_w = e_outh.multiply(outh_neth).multiply(input);
-	e_w = e_w.expandTensor();
+	e_outh = e_outh.T();
+	af::array e_w = e_outh*outh_neth*input;
+	expandTensor(e_w );
 	//e_w.print();
 
-	Tensor weight_new_1 = h1_weight - learning_rate*e_w;
+	af::array weight_new_1 = h1_weight - learning_rate*e_w;
 	//weight_new_1.print();
 
 	h1_weight = weight_new_1;

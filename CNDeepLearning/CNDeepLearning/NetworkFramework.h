@@ -27,8 +27,8 @@ namespace ASRG
 		}
 		void test();
 
-		Tensor input, h1_weight, h2_weight, b, b2, Target, E_total;
-		Tensor  outh, outo;
+		af::array input, h1_weight, h2_weight, b, b2, Target, E_total;
+		af::array  outh, outo;
 		float learning_rate;
 		float e_total;
 	};
