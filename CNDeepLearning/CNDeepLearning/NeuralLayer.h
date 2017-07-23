@@ -5,7 +5,7 @@
 
 #include "Util.h"
 #include "Shape.h"
-#include "Tensor.h"
+#include "Tensor_CPU.h"
 
 using namespace std;
 

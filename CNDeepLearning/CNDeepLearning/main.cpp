@@ -1,26 +1,17 @@
-#include<iostream>
-#include "NetworkFramework.h"
+#include "DataLayer.h"
+#include "FullyConnectedLayer.h"
+#include "LogisticLayer.h"
+#include ""
+#include "ForwardNeuralNetwork.h"
+
+using namespace std;
+using namespace ASRG;
 
 int main()
 {
-	using namespace ASRG;
-	using namespace std;
-	try
-	{
+	ForwardNeuralNetwork Net;
 
-		NetworkFramework framework;
-		framework.init();
-		framework.run();
-		framework.clear();
-
-
-	}
-	catch (const std::exception& e)
-	{
-		cout << e.what() << endl;
-	}
-
-
+	Net.PushLayer(new Full)
 	system("pause");
 	return 0;
 }

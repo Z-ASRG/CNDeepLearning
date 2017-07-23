@@ -21,6 +21,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tensor_CPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NeuralLayer.h">
@@ -38,14 +41,14 @@
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputLayer.h">
-      <Filter>Header Files\Layers</Filter>
-    </ClInclude>
     <ClInclude Include="ForwardNeuralNetwork.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tensor.h">
+    <ClInclude Include="Tensor_CPU.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataLayer.h">
+      <Filter>Header Files\Layers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

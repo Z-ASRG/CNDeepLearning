@@ -126,15 +126,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tensor_CPU.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataLayer.h" />
     <ClInclude Include="ForwardNeuralNetwork.h" />
     <ClInclude Include="FullyConnectedLayer.h" />
-    <ClInclude Include="InputLayer.h" />
     <ClInclude Include="LogisticLayer.h" />
     <ClInclude Include="NeuralLayer.h" />
     <ClInclude Include="Shape.h" />
-    <ClInclude Include="Tensor.h" />
+    <ClInclude Include="Tensor_CPU.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

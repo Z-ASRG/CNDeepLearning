@@ -20,11 +20,17 @@ namespace ASRG
 		//Best network container
 		Network m_OptimalNetwork;
 	public:
-		ForwardNeuralNetwork();
-		~ForwardNeuralNetwork();
+		ForwardNeuralNetwork() {};
+		~ForwardNeuralNetwork() {};
 
 		//Add layer to network, will call ReshapeNetwork inside
-		bool PushLayer(NeuralLayer* pLayer);
+		bool PushLayer(NeuralLayer* pLayer)
+		{
+			if (pLayer == nullptr) { return false; }
+			m_Network.push_back(pLayer);
+
+			return true;
+		};
 
 		//Insert layer to network, will call ReshapeNetwork inside
 		bool InsertLayer(uint32 LayerID, NeuralLayer* pLayer);
@@ -33,7 +39,16 @@ namespace ASRG
 		bool EraseLayer(uint32 LayerID);
 
 		//Reshape the input, output, batch size
-		void ReshapeNetwork();
+		void ReshapeNetwork()
+		{
+			auto pPrevLayer = m_Network.begin();
+			auto pLayer = pPrevLayer++;
+
+			for (auto pLayer : m_Network)
+			{
+				//pLayer->
+			}
+		};
 
 		//Forward, just call forward function in order
 		void Forward(const Tensor &TrainingDataBatch)
