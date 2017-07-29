@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CNDeepLearning", "CNDeepLearning\CNDeepLearning.vcxproj", "{2B6AF8C9-0FA2-4065-B44C-E890D98F742D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZZDTest", "ZZDTest\ZZDTest.vcxproj", "{75C9253D-597A-47DF-860F-27E06905C19A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{2B6AF8C9-0FA2-4065-B44C-E890D98F742D}.Release|x64.Build.0 = Release|x64
 		{2B6AF8C9-0FA2-4065-B44C-E890D98F742D}.Release|x86.ActiveCfg = Release|Win32
 		{2B6AF8C9-0FA2-4065-B44C-E890D98F742D}.Release|x86.Build.0 = Release|Win32
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Debug|x64.ActiveCfg = Debug|x64
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Debug|x64.Build.0 = Debug|x64
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Debug|x86.ActiveCfg = Debug|Win32
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Debug|x86.Build.0 = Debug|Win32
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Release|x64.ActiveCfg = Release|x64
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Release|x64.Build.0 = Release|x64
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Release|x86.ActiveCfg = Release|Win32
+		{75C9253D-597A-47DF-860F-27E06905C19A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
