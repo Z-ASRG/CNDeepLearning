@@ -108,10 +108,6 @@ void ZNeuralNetworkFramework::end()
 		output_layer.caculateError();
 
 
-		//backward 
-		output_layer.backward();
-		hidden_layer.backward();
-
 		input_layer.showInput();
 		output_layer.showError();
 	}

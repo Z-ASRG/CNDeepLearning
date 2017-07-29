@@ -45,7 +45,9 @@ public:
 					=(this->parent->output_value._data[r]                             
 					* this->output_value._data[c]*(1- this->output_value._data[c])    //out_h1(1-out_h1)
 					*e[c])
-					*this->learning_rate*(-1)+ this->weight._data[r*this->weight._shape.column + c];
+					*this->learning_rate*(-1)+ this->weight._data[r*this->weight._shape.column + c]
+					;
+				//-0.3*this->weight._data[r*this->weight._shape.column + c]
 			}
 		}
 		////update bias
