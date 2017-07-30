@@ -51,18 +51,21 @@ void ZNeuralNetworkFramework::init()
 
 void ZNeuralNetworkFramework::run()
 {
-	int i1 = 9000000;
+	int i1 = 9000000,k=0;
 	int bg = 0;
 	int i;
 	while (i1 > 0)
 	{
 		
 		i = random(0, 9);
+		k++;
+		if (k == 10)
+			k = 0;
 		input_layer.output_value._data[bg] = 0;
 		output_layer.target._data[bg] = 0;
-		input_layer.output_value._data[i] = 1;
-		output_layer.target._data[i] = 1;
-		bg = i;
+		input_layer.output_value._data[k] = 1;
+		output_layer.target._data[k] = 1;
+		bg = k;
 
 		//forward
 		hidden_layer.forward();

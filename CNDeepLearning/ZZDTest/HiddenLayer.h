@@ -41,12 +41,12 @@ public:
 			for (int c = 0; c < this->weight._shape.column; c++)
 			{
 				
-				this->weight._data[r*this->weight._shape.column+c]
-					=(this->parent->output_value._data[r]                             
-					* this->output_value._data[c]*(1- this->output_value._data[c])    //out_h1(1-out_h1)
-					*e[c])
-					*this->learning_rate*(-1)+ this->weight._data[r*this->weight._shape.column + c]
-					;
+				this->weight._data[r*this->weight._shape.column + c]
+					= (this->parent->output_value._data[r]
+						* this->output_value._data[c] * (1 - this->output_value._data[c])    //out_h1(1-out_h1)
+						*e[c])
+					*this->learning_rate*(-1) + this->weight._data[r*this->weight._shape.column + c]
+					;// -0.1*0.2*this->weight._data[r*this->weight._shape.column + c];//weight decay
 				//-0.3*this->weight._data[r*this->weight._shape.column + c]
 			}
 		}
