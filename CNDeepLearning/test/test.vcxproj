@@ -19,30 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HiddenLayer.h" />
-    <ClInclude Include="InputLayer.h" />
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="NeuralPerception.h" />
-    <ClInclude Include="OutputLayer.h" />
-    <ClInclude Include="Tensor.h" />
-    <ClInclude Include="ZNeuralNetworkFramework.h" />
-    <ClInclude Include="ZUtil.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="HiddenLayer.cpp" />
-    <ClCompile Include="InputLayer.cpp" />
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="NeuralPerception.cpp" />
-    <ClCompile Include="OutputLayer.cpp" />
-    <ClCompile Include="Tensor.cpp" />
-    <ClCompile Include="ZNeuralNetworkFramework.cpp" />
+    <ClCompile Include="源.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{75c9253d-597a-47df-860f-27e06905c19a}</ProjectGuid>
+    <ProjectGuid>{c0065d02-0ebc-4f00-a83c-4539fc11756b}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ZZDTest</RootNamespace>
+    <RootNamespace>test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -100,8 +83,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\SDK\boost_1_64_0\shared_lib\include;F:\SDK\boost_1_64_0\;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\SDK\boost_1_64_0\shared_lib\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

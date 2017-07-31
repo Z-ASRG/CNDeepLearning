@@ -2,6 +2,14 @@
 #include "Tensor.h"
 #include "NeuralPerception.h"
 #include "Layer.h"
+#define BOOST_ALL_DYN_LINK
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
+#include <boost/threadpool.hpp>   
+
+#include <iostream>
+#include <memory>
+
 
 template<typename T = float>
 class HiddenLayer :public Layer<T>
@@ -10,6 +18,7 @@ public:
 	HiddenLayer(int row, int column)
 		:Layer(row,column),bias(row,column)
 	{}
+
 
 	Tensor<T> weight;
 	Tensor<T> bias;
@@ -36,6 +45,7 @@ public:
 			e.push_back(net_wi);
 		}
 		this->bgweight = this->weight;
+		//threadpool.size_controller().resize(this->weight._shape.row);
 		for (int r = 0; r < this->weight._shape.row; r++)
 		{
 			for (int c = 0; c < this->weight._shape.column; c++)
@@ -49,7 +59,11 @@ public:
 					;// -0.1*0.2*this->weight._data[r*this->weight._shape.column + c];//weight decay
 				//-0.3*this->weight._data[r*this->weight._shape.column + c]
 			}
+			//boost::bind(&HiddenLayer::computeWeight,this, r,e)();
+			//computeWeight(r, e);
+			//threadpool.schedule(boost::bind(&HiddenLayer::computeWeight, this, r, e));
 		}
+		//threadpool.wait();
 		////update bias
 		for (int i = 0; i < this->bias._data.size(); i++)
 		{
@@ -78,4 +92,20 @@ public:
 		//UpdateWeight(this->weight, this->weight, ooo);
 
 	}
+private:
+	inline void computeWeight(int r,const vector<T>& e)
+	{
+		for (int c = 0; c < this->weight._shape.column; c++)
+		{
+
+			this->weight._data[r*this->weight._shape.column + c]
+				= (this->parent->output_value._data[r]
+					* this->output_value._data[c] * (1 - this->output_value._data[c])    //out_h1(1-out_h1)
+					*e[c])
+				*this->learning_rate*(-1) + this->weight._data[r*this->weight._shape.column + c]
+				;// -0.1*0.2*this->weight._data[r*this->weight._shape.column + c];//weight decay
+				 //-0.3*this->weight._data[r*this->weight._shape.column + c]
+		}
+	}
+	boost::threadpool::pool threadpool;
 };

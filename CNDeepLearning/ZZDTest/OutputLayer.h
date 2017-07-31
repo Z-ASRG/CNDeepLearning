@@ -65,6 +65,19 @@ public:
 		}
 		std::cout << "Total Error: " << sum << std::endl;
 	}
+	virtual T getError()
+	{
+		T sum = 0;
+		for (int i = 0; i < error._data.size(); i++)
+		{
+			sum += error._data[i];
+		}
+		return sum;
+	}
+	virtual T getError(int i)
+	{
+		return error._data[i];
+	}
 public:
 	Tensor<T> weight;
 	Tensor<T> bias;

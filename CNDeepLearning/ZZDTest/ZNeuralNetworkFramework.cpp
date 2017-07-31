@@ -1,5 +1,5 @@
 #include "ZNeuralNetworkFramework.h"
-
+#include<boost/timer.hpp>
 
 
 ZNeuralNetworkFramework::ZNeuralNetworkFramework()
@@ -51,9 +51,11 @@ void ZNeuralNetworkFramework::init()
 
 void ZNeuralNetworkFramework::run()
 {
+	boost::timer t;
 	int i1 = 9000000,k=0;
 	int bg = 0;
 	int i;
+	double cerror;
 	while (i1 > 0)
 	{
 		
@@ -80,9 +82,13 @@ void ZNeuralNetworkFramework::run()
 		i1--;
 		//il1.showInput();
 		//il3.showError();
+
+		cerror = output_layer.getError();
+
 	}
 	
-
+	cout << "Used time: " << t.elapsed() << endl;
+	cout << "error:" << cerror << endl;
 
 }
 

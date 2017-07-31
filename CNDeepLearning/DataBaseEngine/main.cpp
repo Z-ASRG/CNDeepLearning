@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <boost/filesystem.hpp>  
+using namespace std;
 
 int get_filenames(const std::string& dir, std::vector<std::string>& filenames)
 {
@@ -31,11 +32,20 @@ int get_filenames(const std::string& dir, std::vector<std::string>& filenames)
 
 	return filenames.size();
 }
-using namespace std;
-int main()
+void saveFilesIntoDatabase(std::string filespath, leveldb::DB* db)
 {
 	vector<std::string> files;
-	get_filenames("E:\\train_image\\0\\", files);
+	get_filenames(filespath, files);
+
+	std::stringstream ss;
+	boost::archive::text_oarchive osa(ss);
+	//osa << t;
+
+	leveldb::Status s = db->Put(leveldb::WriteOptions(), "a", ss.str());
+}
+int main()
+{
+
 
 	leveldb::DB* db;
 	leveldb::Options options;
@@ -44,39 +54,39 @@ int main()
 
 	if (!s.ok())
 	{
+		cout << "create database failed" << endl;
 		return -1;
 	}
-	double arr[] = { 2.9,34.7 };
-	Tensor<double> t(arr, 1, 2), t2;
 
-	std::stringstream ss;
-	boost::archive::text_oarchive osa(ss);
-	osa << t;
 
-	s = db->Put(leveldb::WriteOptions(), "a", ss.str());
 
-	std::string value;
-	s = db->Get(leveldb::ReadOptions(), "a", &value);
-	std::stringstream oss;
-	oss << value;
-	boost::archive::text_iarchive isa(oss);
-	isa >> t2;
-	cout << value << endl;
+	//double arr[] = { 2.9,34.7 };
+	//Tensor<double> t(arr, 1, 2), t2;
+
+
+
+	//std::string value;
+	//s = db->Get(leveldb::ReadOptions(), "a", &value);
+	//std::stringstream oss;
+	//oss << value;
+	//boost::archive::text_iarchive isa(oss);
+	//isa >> t2;
+	//cout << value << endl;
 
 	delete db;
 
 
 
-	std::ofstream ofs("myfile.txt");
-	boost::archive::text_oarchive oa(ofs);
-	oa << t;
-	ofs.close();
-	///read
+	//std::ofstream ofs("myfile.txt");
+	//boost::archive::text_oarchive oa(ofs);
+	//oa << t;
+	//ofs.close();
+	/////read
 
-	std::ifstream ifs("myfile.txt");
-	boost::archive::text_iarchive ia(ifs);
-	ia >> t2;
-	ifs.close();
+	//std::ifstream ifs("myfile.txt");
+	//boost::archive::text_iarchive ia(ifs);
+	//ia >> t2;
+	//ifs.close();
 
 
 
