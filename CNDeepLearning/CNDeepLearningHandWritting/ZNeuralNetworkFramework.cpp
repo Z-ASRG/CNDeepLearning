@@ -1,10 +1,12 @@
 #include "ZNeuralNetworkFramework.h"
 #include<boost/timer.hpp>
+#include "Tensor.h"
+#include "Database.h"
 
 
 
 ZNeuralNetworkFramework::ZNeuralNetworkFramework()
-	:input_layer(1,10),hidden_layer(1,3),output_layer(1,10)
+	:input_layer(1,400),hidden_layer(1,11),output_layer(1,10)
 {
 }
 
@@ -17,18 +19,33 @@ void ZNeuralNetworkFramework::init()
 {
 	srand(unsigned(time(0)));
 
-	double ti[] = { 1.0,0.0,0.0,0.0,0.0,
-		            0.0,0.0,0.0,0.0,0.0};
+	std::string filepath = "G:\\train_image\\";
+
+	std::vector<Tensor<double>> pic[10];
+	readDataBase("0",filepath,pic[0]);
+	/*readDataBase("1", filepath, pic[1]);
+	readDataBase("2", filepath, pic[2]);
+	readDataBase("3", filepath, pic[3]);
+	readDataBase("4", filepath, pic[4]);
+	readDataBase("5", filepath, pic[5]);
+	readDataBase("6", filepath, pic[6]);
+	readDataBase("7", filepath, pic[7]);
+	readDataBase("8", filepath, pic[8]);
+	readDataBase("9", filepath, pic[9]);*/
+
+
+
 	double th[] = {0};
 	double tb1[] = { 0};
-	Tensor<double> i(ti, 1, 10), h(th, 1, 1), b1(tb1, 1, 1);
+	Tensor<double> i=pic[0][0], h(th, 1, 1), b1(tb1, 1, 1);
 
+	i.reShape(1, i._shape.row*i._shape.column);
 	input_layer.output_value = i;
 	input_layer.child = &hidden_layer;
 
-	h.generateRandomTensor(10,3);
+	h.generateRandomTensor(pic[0][0]._shape.row*pic[0][0]._shape.column,11);
 	hidden_layer.weight = h;
-	b1.generateRandomTensor(1,3);
+	b1.generateRandomTensor(1,11);
 	hidden_layer.bias = b1;
 	hidden_layer.parent = &input_layer;
 	hidden_layer.child = &output_layer;
@@ -43,7 +60,7 @@ void ZNeuralNetworkFramework::init()
 	Tensor<double> target(te, 1, 10);
 
 	output_layer.parent = &hidden_layer;
-	o.generateRandomTensor(3,10);
+	o.generateRandomTensor(11,10);
 	output_layer.weight = o;
 	b2.generateRandomTensor(1,10);
 	output_layer.bias = b2;
@@ -53,7 +70,7 @@ void ZNeuralNetworkFramework::init()
 void ZNeuralNetworkFramework::run()
 {
 	boost::timer t;
-	int i1 = 4000000, k = 0;
+	int i1 = 40000, k = 0;
 	//int i1 = 9000000,k=0;
 	int bg = 0;
 	int i;

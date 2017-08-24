@@ -23,7 +23,7 @@
     <ProjectGuid>{A328B925-FE5B-4553-9B23-5567FF3F057D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>DataBaseEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,19 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\SDK\leveldb-windows\include;F:\SDK\boost_1_64_0\;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\SDK\leveldb-windows\Release;F:\SDK\boost_1_64_0\shared_lib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\OpenCV\OpenCV320\opencv\build\include;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\leveldb\leveldb-windows\Release;F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\OpenCV\OpenCV320\opencv\build\x64\vc14\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\SDK\leveldb-windows\include;F:\SDK\boost_1_64_0;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\SDK\leveldb-windows\Debug;F:\SDK\boost_1_64_0\shared_lib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\leveldb\leveldb-windows\Debug;F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>F:\SDK\boost_1_64_0;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\OpenCV\OpenCV320\opencv\build\include;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\leveldb\leveldb-windows\Release;F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\OpenCV\OpenCV320\opencv\build\x64\vc14\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -94,13 +98,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>LevelDB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>LevelDB.lib;opencv_world320.lib;sfml-main.lib;sfml-window.lib;sfml-system.lib;sfml-network.lib;sfml-graphics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -110,10 +115,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>LevelDB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>LevelDB.lib;sfml-main-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,11 +143,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>LevelDB.lib;sfml-main.lib;sfml-window.lib;sfml-system.lib;sfml-network.lib;sfml-graphics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

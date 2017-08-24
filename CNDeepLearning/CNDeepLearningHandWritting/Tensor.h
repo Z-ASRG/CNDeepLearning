@@ -38,10 +38,10 @@ public:
 	{
 		for (int i = 0; i < t._shape.row*t._shape.column; i++)
 		{
-			this->_data[i]=t._data[i];
+			this->_data[i] = t._data[i];
 		}
 	}
-	Tensor():_shape(0,0)
+	Tensor() :_shape(0, 0)
 	{
 
 	}
@@ -63,8 +63,8 @@ public:
 		{
 			for (int j = 0; j < this->_shape.column; j++)
 			{
-				newmat._data[i*_shape.row + j] = this->_data[i*_shape.row + j]
-					+ mat._data[i*_shape.row + j];
+				newmat._data[i*this->_shape.column + j] = this->_data[i*this->_shape.column + j]
+					+ mat._data[i*this->_shape.column + j];
 			}
 		}
 	}
@@ -107,8 +107,8 @@ public:
 		{
 			for (int j = 0; j < this->_shape.column; j++)
 			{
-				newmat._data[i*_shape.row + j] = 
-					num- this->_data[i*_shape.row + j];
+				newmat._data[i*_shape.row + j] =
+					num - this->_data[i*_shape.row + j];
 			}
 		}
 	}
@@ -157,6 +157,11 @@ public:
 
 	Shape _shape;
 	std::vector<T> _data;
+	void reShape(int row,int column)
+	{
+		this->_shape.row = row;
+		this->_shape.column = column;
+	}
 
 	void multi_thread_mat_multiply(int rowId, Tensor<T>& _new, const Tensor<T>& _right)
 	{
@@ -165,7 +170,7 @@ public:
 			_new._data[rowId*_new._shape.column + k] = 0;
 			for (int c = 0; c < _right._shape.row; c++)
 			{
-				_new._data[rowId*_new._shape.column + k] += _data[rowId*_shape.column + c] 
+				_new._data[rowId*_new._shape.column + k] += _data[rowId*_shape.column + c]
 					* _right._data[c*_right._shape.column + k];
 			}
 		}
@@ -191,7 +196,7 @@ public:
 		{
 			for (int c = 0; c < column; c++)
 			{
-				this->_data.push_back(random(-1.0,1.0));
+				this->_data.push_back(random(-1.0, 1.0));
 			}
 		}
 	}

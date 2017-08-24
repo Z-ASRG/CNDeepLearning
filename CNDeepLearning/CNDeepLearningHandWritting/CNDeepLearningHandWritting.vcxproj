@@ -19,19 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ASRGBackPropagationNeuralNetwork.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ZUtil.cpp" />
+    <ClInclude Include="Database.h" />
+    <ClInclude Include="HiddenLayer.h" />
+    <ClInclude Include="InputLayer.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="NeuralPerception.h" />
+    <ClInclude Include="OutputLayer.h" />
+    <ClInclude Include="Tensor.h" />
+    <ClInclude Include="ZNeuralNetworkFramework.h" />
+    <ClInclude Include="ZUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ASRGBackPropagationNeuralNetwork.h" />
-    <ClInclude Include="ZUtil.h" />
+    <ClCompile Include="HiddenLayer.cpp" />
+    <ClCompile Include="InputLayer.cpp" />
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NeuralPerception.cpp" />
+    <ClCompile Include="OutputLayer.cpp" />
+    <ClCompile Include="Tensor.cpp" />
+    <ClCompile Include="ZNeuralNetworkFramework.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{1539eee4-3ec0-451b-b7a6-5789b7509d39}</ProjectGuid>
+    <ProjectGuid>{aa6b5715-f9eb-4c8c-b3e3-c5fe3f10b92e}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ZZDAMP</RootNamespace>
+    <RootNamespace>CNDeepLearningHandWritting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -81,15 +93,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\SDK\boost_1_64_0;$(IncludePath)</IncludePath>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\OpenCV\OpenCV320\opencv\build\include;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\leveldb\leveldb-windows\Debug;F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\OpenCV\OpenCV320\opencv\build\x64\vc14\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>F:\SDK\boost_1_63_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\SDK\boost_1_64_0\;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\SDK\boost_1_64_0\shared_lib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\OpenCV\OpenCV320\opencv\build\include;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\SDK\leveldb\leveldb-windows\Release;F:\SDK\boost_1_64_0\stage\libv141\lib;F:\SDK\OpenCV\OpenCV320\opencv\build\x64\vc14\lib;F:\SDK\s\SFML-2.4.1\mybuild\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -101,9 +115,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>LevelDB.lib;opencv_world320.lib;sfml-main-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,11 +143,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>LevelDB.lib;opencv_world320.lib;sfml-main.lib;sfml-window.lib;sfml-system.lib;sfml-network.lib;sfml-graphics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

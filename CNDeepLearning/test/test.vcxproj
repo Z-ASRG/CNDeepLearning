@@ -83,6 +83,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\SDK\leveldb\leveldb-windows\include;F:\SDK\boost_1_64_0\;F:\SDK\OpenCV\OpenCV320\opencv\build\include;F:\SDK\s\SFML-2.4.1\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

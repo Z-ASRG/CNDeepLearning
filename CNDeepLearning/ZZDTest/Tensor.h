@@ -4,13 +4,24 @@
 #include<cmath>
 #include <vector>
 
-#define BOOST_ALL_DYN_LINK
+
 #include <boost/thread.hpp>
 #include <boost/thread/thread_pool.hpp>   
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/vector.hpp>
 
 template<typename T = double>
 class Tensor
 {
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & _shape;
+		ar & _data;
+	}
 public:
 	Tensor(T* data, int row, int column) :_shape(row, column)
 	{
@@ -23,14 +34,14 @@ public:
 	{
 
 	}
-	Tensor(const Tensor& t) :_shape(t._shape.row, t._shape.column), _data(row*column)
+	Tensor(const Tensor& t) :_shape(t._shape.row, t._shape.column), _data(t._shape.row*t._shape.column)
 	{
-		for (int i = 0; i < row*column; i++)
+		for (int i = 0; i < t._shape.row*t._shape.column; i++)
 		{
-			this->_data.push_back(t.data[i]);
+			this->_data[i] = t._data[i];
 		}
 	}
-	Tensor():_shape(0,0)
+	Tensor() :_shape(0, 0)
 	{
 
 	}
@@ -96,8 +107,8 @@ public:
 		{
 			for (int j = 0; j < this->_shape.column; j++)
 			{
-				newmat._data[i*_shape.row + j] = 
-					num- this->_data[i*_shape.row + j];
+				newmat._data[i*_shape.row + j] =
+					num - this->_data[i*_shape.row + j];
 			}
 		}
 	}
@@ -131,6 +142,14 @@ public:
 public:
 	struct Shape
 	{
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int version)
+		{
+			ar & row;
+			ar & column;
+		}
 	public:
 		int row, column;
 		Shape(int _row, int _column) :row(_row), column(_column) {}
@@ -146,7 +165,7 @@ public:
 			_new._data[rowId*_new._shape.column + k] = 0;
 			for (int c = 0; c < _right._shape.row; c++)
 			{
-				_new._data[rowId*_new._shape.column + k] += _data[rowId*_shape.column + c] 
+				_new._data[rowId*_new._shape.column + k] += _data[rowId*_shape.column + c]
 					* _right._data[c*_right._shape.column + k];
 			}
 		}
@@ -172,7 +191,7 @@ public:
 		{
 			for (int c = 0; c < column; c++)
 			{
-				this->_data.push_back(random(-1.0,1.0));
+				this->_data.push_back(random(-1.0, 1.0));
 			}
 		}
 	}
